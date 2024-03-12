@@ -55,6 +55,7 @@ class Snake:
         self.active = True
         self.initBodyCellCount = bodyCellCount
         self.headDirection = Directions.LEFT
+        self.nextHeadDirection = Directions.LEFT
         self.bodyCellQueue = deque()
         self.initSnakeBody(bodyCellCount)
 
@@ -73,7 +74,7 @@ class Snake:
             return
         if self.headDirection == Directions.RIGHT and tryDirection == Directions.LEFT:
             return   
-        self.headDirection = tryDirection
+        self.nextHeadDirection = tryDirection
 
     def getHeadIndicies(self):
         return self.bodyCellQueue[len(self.bodyCellQueue) - 1].getGridCellIndicies()
@@ -102,6 +103,7 @@ class Snake:
         for cellIndex in range(bodyCellCount):
             self.bodyCellQueue.append(SnakeBodyCell((midGridCellIndicies[0], midGridCellIndicies[1] + cellIndex)))
     def advanceSnake(self, incrementLength):
+        self.headDirection = self.nextHeadDirection
         if self.active == False:
             return
         snakeHeadIndicies = self.bodyCellQueue[len(self.bodyCellQueue)-1].getGridCellIndicies()
