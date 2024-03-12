@@ -26,6 +26,8 @@ class Directions(Enum):
     LEFT = 2
     RIGHT = 3
 
+SNAKE_INIT_DIRECTION = Directions.LEFT
+
 # create a window
 screen = pygame.display.set_mode(SCREEN_SIZE)
 clock = pygame.time.Clock()
@@ -54,13 +56,14 @@ class Snake:
     def __init__(self, bodyCellCount):
         self.active = True
         self.initBodyCellCount = bodyCellCount
-        self.headDirection = Directions.LEFT
-        self.nextHeadDirection = Directions.LEFT
+        self.headDirection = SNAKE_INIT_DIRECTION
+        self.nextHeadDirection = SNAKE_INIT_DIRECTION
         self.bodyCellQueue = deque()
         self.initSnakeBody(bodyCellCount)
 
     def reset(self):
-        self.headDirection = Directions.LEFT
+        self.headDirection = SNAKE_INIT_DIRECTION
+        self.nextHeadDirection = SNAKE_INIT_DIRECTION
         self.bodyCellQueue.clear()
         self.initSnakeBody(self.initBodyCellCount)
         self.active = True
